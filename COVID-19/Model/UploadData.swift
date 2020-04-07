@@ -9,8 +9,5 @@
 import Foundation
 import UIKit
 
-struct DataLoaderAPI {
-    
-    
-}
+
 

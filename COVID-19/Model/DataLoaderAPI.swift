@@ -9,8 +9,7 @@
 import Foundation
 import Alamofire
 
-
-class Service {
+class DataLoaderAPI {
     
     fileprivate var baseURL = "https://corona.lmao.ninja/countries/"
     //https://corona.lmao.ninja/countries/
@@ -28,7 +27,8 @@ class Service {
             do {
                 let countries = try JSONDecoder().decode([Country].self, from: data)
                 self.callBack?(countries, true,"")
-//                print(countries)
+                print(countries.self)
+//                print(Country.countryInfo)
             } catch {
                 self.callBack?(nil, false, error.localizedDescription)
             }

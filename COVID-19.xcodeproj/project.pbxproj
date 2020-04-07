@@ -17,8 +17,7 @@
 		875F6A6A2437B150002C652D /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A692437B150002C652D /* CountryCell.swift */; };
 		875F6A6C2437B2B8002C652D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A6B2437B2B8002C652D /* ModelData.swift */; };
 		875F6A6E2437B61F002C652D /* ModelCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A6D2437B61F002C652D /* ModelCountry.swift */; };
-		875F6A712437B6B0002C652D /* UploadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A702437B6B0002C652D /* UploadData.swift */; };
-		875F6A732438CF98002C652D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A722438CF98002C652D /* Service.swift */; };
+		875F6A732438CF98002C652D /* DataLoaderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875F6A722438CF98002C652D /* DataLoaderAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +33,7 @@
 		875F6A692437B150002C652D /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		875F6A6B2437B2B8002C652D /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		875F6A6D2437B61F002C652D /* ModelCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCountry.swift; sourceTree = "<group>"; };
-		875F6A702437B6B0002C652D /* UploadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadData.swift; sourceTree = "<group>"; };
-		875F6A722438CF98002C652D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		875F6A722438CF98002C652D /* DataLoaderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderAPI.swift; sourceTree = "<group>"; };
 		EB1A7984998F5FA93BA506D9 /* Pods-COVID-19.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19.debug.xcconfig"; path = "Target Support Files/Pods-COVID-19/Pods-COVID-19.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E0F69AB766A27BBE38C3EA /* Pods-COVID-19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19.release.xcconfig"; path = "Target Support Files/Pods-COVID-19/Pods-COVID-19.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,8 +113,7 @@
 		875F6A6F2437B689002C652D /* HelperFile */ = {
 			isa = PBXGroup;
 			children = (
-				875F6A702437B6B0002C652D /* UploadData.swift */,
-				875F6A722438CF98002C652D /* Service.swift */,
+				875F6A722438CF98002C652D /* DataLoaderAPI.swift */,
 			);
 			name = HelperFile;
 			path = Model;
@@ -255,10 +252,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				875F6A6E2437B61F002C652D /* ModelCountry.swift in Sources */,
-				875F6A732438CF98002C652D /* Service.swift in Sources */,
+				875F6A732438CF98002C652D /* DataLoaderAPI.swift in Sources */,
 				875F6A6A2437B150002C652D /* CountryCell.swift in Sources */,
 				875F6A572437A6D0002C652D /* MainViewController.swift in Sources */,
-				875F6A712437B6B0002C652D /* UploadData.swift in Sources */,
 				875F6A6C2437B2B8002C652D /* ModelData.swift in Sources */,
 				875F6A532437A6D0002C652D /* AppDelegate.swift in Sources */,
 				875F6A552437A6D0002C652D /* SceneDelegate.swift in Sources */,
