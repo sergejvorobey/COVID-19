@@ -23,13 +23,14 @@ class DataLoaderAPI {
             
             guard let data = responseData.data else {return}
             self.callBack?(nil, false, "")
-//            print(data)
+
             do {
                 let countries = try JSONDecoder().decode([Country].self, from: data)
                 self.callBack?(countries, true,"")
-                print(countries.self)
-//                print(Country.countryInfo)
-            } catch {
+//                print(countries[0])
+            }
+            
+            catch {
                 self.callBack?(nil, false, error.localizedDescription)
             }
         }

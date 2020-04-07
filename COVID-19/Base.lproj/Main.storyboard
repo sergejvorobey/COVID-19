@@ -73,10 +73,6 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-ci-AYm">
-                                                    <rect key="frame" x="107" y="282" width="200" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-Fv-iK7">
                                                     <rect key="frame" x="215.5" y="40" width="180" height="213"/>
                                                     <subviews>
@@ -121,15 +117,24 @@
                                                         <constraint firstAttribute="width" constant="180" id="QeZ-He-Mme"/>
                                                     </constraints>
                                                 </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-ci-AYm">
+                                                    <rect key="frame" x="167" y="289" width="80" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="lZn-eJ-f2Y"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="leading" secondItem="num-dl-4ye" secondAttribute="leadingMargin" constant="147" id="7ew-jg-TDv"/>
                                                 <constraint firstItem="ISp-QP-f45" firstAttribute="leading" secondItem="num-dl-4ye" secondAttribute="leading" constant="20" id="Ce3-Pr-pQQ"/>
                                                 <constraint firstItem="ISp-QP-f45" firstAttribute="top" secondItem="ddm-c7-imQ" secondAttribute="bottom" constant="8" id="G4n-Fb-JjA"/>
                                                 <constraint firstItem="9nO-Fv-iK7" firstAttribute="leading" secondItem="ISp-QP-f45" secondAttribute="trailing" constant="20" id="HzM-wv-mIJ"/>
                                                 <constraint firstItem="ddm-c7-imQ" firstAttribute="top" secondItem="num-dl-4ye" secondAttribute="topMargin" id="OKe-dW-5TS"/>
+                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="bottom" secondItem="num-dl-4ye" secondAttribute="bottomMargin" id="PSJ-Nl-G2t"/>
                                                 <constraint firstItem="ddm-c7-imQ" firstAttribute="trailing" secondItem="num-dl-4ye" secondAttribute="trailingMargin" id="TLe-om-J51"/>
                                                 <constraint firstItem="ddm-c7-imQ" firstAttribute="leading" secondItem="num-dl-4ye" secondAttribute="leadingMargin" id="sMt-wv-aPI"/>
                                                 <constraint firstItem="9nO-Fv-iK7" firstAttribute="top" secondItem="ddm-c7-imQ" secondAttribute="bottom" constant="8.5" id="tBg-Os-1g2"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Mqn-ci-AYm" secondAttribute="trailing" constant="147" id="yak-E1-Jui"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>

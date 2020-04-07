@@ -30,21 +30,6 @@ class MainViewController: UIViewController {
         tableView.addSubview(self.refreshControll)
     }
     
-    private func parseData() {
-        let dataLoader = DataLoaderAPI()
-        dataLoader.getAllCountryName()
-        dataLoader.completionHandler { [weak self] (countries, status, message) in
-            if status {
-                guard let self = self else {return}
-                guard let _countries = countries else {return}
-                self.countries = _countries
-                self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
-                //                print(countries)
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
     // refresh spinner
     lazy var refreshControll: UIRefreshControl = {
         let refreshControll = UIRefreshControl()
@@ -61,10 +46,12 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func refreshButton(_ sender: UIBarButtonItem) {
-        tableView.reloadData()
+//        tableView.reloadData()
+        //TO DO: return to first item in table view
     }
 }
 
+// MARK: Table View DataSource, and Delegate
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,7 +83,27 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let date = Date(timeIntervalSince1970: TimeInterval(datePublic / 1000))
         
         countryCell.timeUpdate.text = date.publicationDate(withDate: date)
-        //        countryCell.countryFlag.image = country.flag
+//        countryCell.countryFlag.image = UIImage(data: try! Data(contentsOf: URL(string: country.countryInfo!.flag!)!))
+        
+//        let myImage = UIImage(named: country.countryInfo!.flag!)
+//        func base64Convert(base64String: String?) -> UIImage {
+//
+//            var imageFlag: UIImage?
+//
+//            if (base64String?.isEmpty)! {
+//                return #imageLiteral(resourceName: "no_image_found")
+//            } else {
+//                let url = URL(string: country.countryInfo!.flag!)
+//                if let data = try? Data(contentsOf: url!)
+//                {
+//                    let image: UIImage = UIImage(data: data)!
+//                    imageFlag = image
+//                }
+//                return imageFlag!
+//            }
+//        }
+
+//        countryCell.countryFlag.image = base64Convert(base64String: country.countryInfo!.flag!)
     
         return countryCell
     }
@@ -110,6 +117,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: Convert Date
 extension Date {
     
     func publicationDate(withDate date: Date) -> String {
@@ -124,6 +132,7 @@ extension Date {
     }
 }
 
+// MARK: Input Search Bar and design
 extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     private var searchBarIsEmpty: Bool {
@@ -156,5 +165,28 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
         })
         
         tableView.reloadData()
+    }
+}
+
+extension Data {
+    var uiImage: UIImage? { UIImage(data: self) }
+}
+
+//MARK: parse API data
+extension MainViewController {
+    
+    private func parseData() {
+        let dataLoader = DataLoaderAPI()
+        dataLoader.getAllCountryName()
+        dataLoader.completionHandler { [weak self] (countries, status, message) in
+            if status {
+                guard let self = self else {return}
+                guard let _countries = countries else {return}
+                self.countries = _countries
+                self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
+                //                print(countries)
+                self.tableView.reloadData()
+            }
+        }
     }
 }
