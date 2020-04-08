@@ -27,7 +27,7 @@ class DataLoaderAPI {
             do {
                 let countries = try JSONDecoder().decode([Country].self, from: data)
                 self.callBack?(countries, true,"")
-//                print(countries[0])
+//                print(countries.count)
             }
             
             catch {

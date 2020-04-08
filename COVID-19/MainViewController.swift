@@ -21,6 +21,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         searchBar()
         parseData()
         tableView.delegate = self
@@ -28,6 +30,23 @@ class MainViewController: UIViewController {
         tableView.tableFooterView = UIView()
 
         tableView.addSubview(self.refreshControll)
+    }
+    
+    //MARK: parse API data
+    private func parseData() {
+        let dataLoader = DataLoaderAPI()
+        dataLoader.getAllCountryName()
+        dataLoader.completionHandler { [weak self] (countries, status, message) in
+            if status {
+                guard let self = self else {return}
+                guard let _countries = countries else {return}
+                self.countries = _countries
+                self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
+                self.navigationItem.title = "\(self.countries.count) Стран"
+                //                print(countries)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // refresh spinner
@@ -71,13 +90,13 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             country = countries[indexPath.row]
         }
-  
+        
         countryCell.countryLabel.text = country.name
-        countryCell.cases.text = country.cases?.description 
-        countryCell.deaths.text = country.deaths?.description
-        countryCell.recovered.text = country.recovered?.description
-        countryCell.todayCases.text = country.todayCases?.description
-        countryCell.todayDeaths.text = country.todayDeaths?.description
+        countryCell.cases.text = "\(country.cases ?? 0)"
+        countryCell.deaths.text = "\(country.deaths ?? 0)"
+        countryCell.recovered.text = "\(country.recovered ?? 0)"
+        countryCell.todayCases.text = "\(country.todayCases ?? 0)"
+        countryCell.todayDeaths.text = "\(country.todayDeaths ?? 0)"
         
         let datePublic = country.updated!
         let date = Date(timeIntervalSince1970: TimeInterval(datePublic / 1000))
@@ -172,21 +191,5 @@ extension Data {
     var uiImage: UIImage? { UIImage(data: self) }
 }
 
-//MARK: parse API data
-extension MainViewController {
-    
-    private func parseData() {
-        let dataLoader = DataLoaderAPI()
-        dataLoader.getAllCountryName()
-        dataLoader.completionHandler { [weak self] (countries, status, message) in
-            if status {
-                guard let self = self else {return}
-                guard let _countries = countries else {return}
-                self.countries = _countries
-                self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
-                //                print(countries)
-                self.tableView.reloadData()
-            }
-        }
-    }
-}
+
+
