@@ -37,16 +37,16 @@ struct CountryInfo: Decodable {
 //    var _id: Int?
 //    var iso2: String?
 //    var iso3: String?
-//    var lat: Int?
-//    var long: Int?
+    var lat: Double?
+    var long: Double?
     var flag: String?
     
     enum CodingKeys: String, CodingKey {
 //        case _id = "_id"
 //        case iso2 = "iso2"
 //        case iso3 = "iso3"
-//        case lat = "lat"
-//        case long = "long"
+        case lat = "lat"
+        case long = "long"
         case flag = "flag"
         
     }

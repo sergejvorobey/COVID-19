@@ -12,14 +12,13 @@ import Alamofire
 class DataLoaderAPI {
     
     fileprivate var baseURL = "https://corona.lmao.ninja/countries/"
-    //https://corona.lmao.ninja/countries/
-    
+
     typealias countriesCallBack = (_ countries:[Country]?, _ status: Bool, _ message:String) -> Void
    
     var callBack: countriesCallBack?
 
     func getAllCountryName() {
-        AF.request(self.baseURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseData { (responseData) in
+        AF.request(self.baseURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseData {(responseData) in
             
             guard let data = responseData.data else {return}
             self.callBack?(nil, false, "")
@@ -27,7 +26,7 @@ class DataLoaderAPI {
             do {
                 let countries = try JSONDecoder().decode([Country].self, from: data)
                 self.callBack?(countries, true,"")
-//                print(countries.count)
+//                print(countries)
             }
             
             catch {

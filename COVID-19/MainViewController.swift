@@ -18,32 +18,38 @@ class MainViewController: UIViewController {
     private var countries = [Country]()
     private var filteredCountries = [Country]()
     
+    let activityIndicator = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+    
         searchBar()
         parseData()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-
+        //        loadMore()
+        //        scrollViewDidScroll(scrollView: UIScrollView())
+        
         tableView.addSubview(self.refreshControll)
+        
     }
     
     //MARK: parse API data
     private func parseData() {
+        
         let dataLoader = DataLoaderAPI()
         dataLoader.getAllCountryName()
+        
         dataLoader.completionHandler { [weak self] (countries, status, message) in
+            
             if status {
                 guard let self = self else {return}
                 guard let _countries = countries else {return}
                 self.countries = _countries
                 self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
                 self.navigationItem.title = "\(self.countries.count) Стран"
-                //                print(countries)
+            
                 self.tableView.reloadData()
             }
         }
@@ -65,8 +71,19 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func refreshButton(_ sender: UIBarButtonItem) {
-//        tableView.reloadData()
-        //TO DO: return to first item in table view
+        
+        scrollToFirstRow()
+    }
+    
+    @IBAction func infoButton(_ sender: UIBarButtonItem) {
+        
+       
+    }
+    
+    //scroll to top
+    func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }
 
@@ -85,6 +102,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let countryCell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath) as! CountryCell
         
         var country: Country
+        
         if isFiltering {
             country = filteredCountries[indexPath.row]
         } else {
@@ -102,28 +120,28 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let date = Date(timeIntervalSince1970: TimeInterval(datePublic / 1000))
         
         countryCell.timeUpdate.text = date.publicationDate(withDate: date)
-//        countryCell.countryFlag.image = UIImage(data: try! Data(contentsOf: URL(string: country.countryInfo!.flag!)!))
+//                countryCell.countryFlag.image = UIImage(data: try! Data(contentsOf: URL(string: country.countryInfo!.flag!)!))
         
-//        let myImage = UIImage(named: country.countryInfo!.flag!)
-//        func base64Convert(base64String: String?) -> UIImage {
-//
-//            var imageFlag: UIImage?
-//
-//            if (base64String?.isEmpty)! {
-//                return #imageLiteral(resourceName: "no_image_found")
-//            } else {
-//                let url = URL(string: country.countryInfo!.flag!)
-//                if let data = try? Data(contentsOf: url!)
-//                {
-//                    let image: UIImage = UIImage(data: data)!
-//                    imageFlag = image
-//                }
-//                return imageFlag!
-//            }
-//        }
-
-//        countryCell.countryFlag.image = base64Convert(base64String: country.countryInfo!.flag!)
-    
+        //        let myImage = UIImage(named: country.countryInfo!.flag!)
+        //        func base64Convert(base64String: String?) -> UIImage {
+        //
+        //            var imageFlag: UIImage?
+        //
+        //            if (base64String?.isEmpty)! {
+        //                return #imageLiteral(resourceName: "no_image_found")
+        //            } else {
+        //                let url = URL(string: country.countryInfo!.flag!)
+        //                if let data = try? Data(contentsOf: url!)
+        //                {
+        //                    let image: UIImage = UIImage(data: data)!
+        //                    imageFlag = image
+        //                }
+        //                return imageFlag!
+        //            }
+        //        }
+        
+//                countryCell.countryFlag.image = base64Convert(base64String: country.countryInfo!.flag!)
+        
         return countryCell
     }
     
@@ -133,6 +151,27 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
+    }
+    
+    //MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "CountryInfoViewController" {
+            
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            
+            let country: Country
+            
+            if isFiltering {
+                country = filteredCountries[indexPath.row]
+            } else {
+                country = countries[indexPath.row]
+            }
+            
+            let countryInfoVC = segue.destination as! CountryInfoViewController
+            
+            countryInfoVC.infoCountry = country
+        }
     }
 }
 
@@ -168,7 +207,7 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
     }
     
     func searchBar () {
-
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Country"
@@ -191,5 +230,17 @@ extension Data {
     var uiImage: UIImage? { UIImage(data: self) }
 }
 
-
-
+extension MainViewController {
+    
+    func alertInfo(withMessage message: String) {
+        
+        let alertController = UIAlertController(title: "",
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Назад", style: .default, handler: nil)
+        
+        alertController.addAction(cancel)
+        present(alertController, animated: true, completion: nil)
+    }
+}
