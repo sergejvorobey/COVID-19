@@ -16,13 +16,6 @@ class NewsWebSiteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let topItem = navigationController?.navigationBar.topItem {
-//            topItem.backBarButtonItem = UIBarButtonItem(title: "",
-//                                                        style: .plain,
-//                                                        target: nil,
-//                                                        action: nil)
-//        }
-        
         guard let url = URL(string: "https://news.rambler.ru/") else { return }
         let request = URLRequest(url: url)
         

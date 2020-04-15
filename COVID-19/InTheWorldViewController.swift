@@ -16,8 +16,15 @@ class InTheWorldViewController: UIViewController {
     @IBOutlet weak var deathsLabel: UILabel!
     @IBOutlet weak var todayDeathsLabel: UILabel!
     @IBOutlet weak var recoveredLabel: UILabel!
+    @IBOutlet weak var lastUpdateLabel: UILabel!
     
-    @IBOutlet weak var pieChartView: PieChartView!
+    @IBOutlet weak var barChartView: BarChartView!
+    
+    @IBOutlet weak var casesStackView: UIStackView!
+    @IBOutlet weak var todayCasesStackView: UIStackView!
+    @IBOutlet weak var deathsStackView: UIStackView!
+    @IBOutlet weak var todayDeathsStackView: UIStackView!
+    @IBOutlet weak var recoveredStackView: UIStackView!
     
     private var countries = [Country]()
     private var allCountElements = [String: Int]()
@@ -27,8 +34,18 @@ class InTheWorldViewController: UIViewController {
         super.viewDidLoad()
         
         parseData()
+        styleLabel()
+      
+    }
+    
+   private func styleLabel() {
         
-        //        setChart(dictionary: allCountElements)
+        let baseColor = #colorLiteral(red: 0.1294117647, green: 0.1449416578, blue: 0.1574646831, alpha: 1)
+        casesStackView.addBackground(color: baseColor, radiusSize: 10)
+        todayCasesStackView.addBackground(color: baseColor, radiusSize: 10)
+        deathsStackView.addBackground(color: baseColor, radiusSize: 10)
+        todayDeathsStackView.addBackground(color: baseColor, radiusSize: 10)
+        recoveredStackView.addBackground(color: baseColor, radiusSize: 10)
         
     }
     
@@ -54,12 +71,18 @@ class InTheWorldViewController: UIViewController {
                 
                 var dictionaryCount = [String: Int]()
                 
-                for country in countries! {
+                guard let countries = countries else { return }
+                
+                for country in countries {
                     casesCount += country.cases!
                     todayCasesCount += country.todayCases!
                     deathsCount += country.deaths!
                     todayDeathsCount += country.todayDeaths!
                     recoveredCount += country.recovered!
+                    let time = country.updated
+                    
+                    let date = Date(timeIntervalSince1970: TimeInterval(time! / 1000))
+                    self.lastUpdateLabel.text = "Последнее обновление: \(date.publicationDate(withDate: date))"
                     
                     dictionaryCount = ["cases": casesCount,
                                        "todayCasesCount": todayCasesCount,
@@ -76,11 +99,21 @@ class InTheWorldViewController: UIViewController {
                 
                 self.allCountElements = dictionaryCount
                 
-                self.casesLabel.text = "Зараженных: \(self.allCountElements["cases"] ?? 0)"
-                self.todayCasesLabel.text = "Зараженных за сутки: \(self.allCountElements["todayCasesCount"] ?? 0)"
-                self.deathsLabel.text = "Смертей: \(self.allCountElements["deathsCount"] ?? 0)"
-                self.todayDeathsLabel.text = "Смертей за сутки: \(self.allCountElements["todayDeathsCount"] ?? 0)"
-                self.recoveredLabel.text = "Выздоровели: \(self.allCountElements["recoveredCount"] ?? 0)"
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .decimal
+                formatter.maximumFractionDigits = 0
+                
+                let cases = formatter.string(from: self.allCountElements["cases"]! as NSNumber)
+                let todayCases = formatter.string(from: self.allCountElements["todayCasesCount"]! as NSNumber)
+                let deaths = formatter.string(from: self.allCountElements["deathsCount"]! as NSNumber)
+                let todayDeaths = formatter.string(from: self.allCountElements["todayDeathsCount"]! as NSNumber)
+                let recovered = formatter.string(from: self.allCountElements["recoveredCount"]! as NSNumber)
+                
+                self.casesLabel.text = "🦠 \(cases ?? "0")"
+                self.todayCasesLabel.text = "🚑  \(todayCases ?? "0")"
+                self.deathsLabel.text = "💀 \(deaths ?? "0")"
+                self.todayDeathsLabel.text = "💀 \(todayDeaths ?? "0")"
+                self.recoveredLabel.text = "💊 \(recovered ?? "0")"
                 
                 self.provideToCharts = ["Зараженных:": casesCount,
                                         "Зараженных в сутки:": todayCasesCount,
@@ -88,12 +121,12 @@ class InTheWorldViewController: UIViewController {
                                         "Смертей в сутки:": todayDeathsCount,
                                         "Излечилось": recoveredCount]
                 var keys = [String]()
-                var values = [Int]()
+                var values = [Double]()
                 
                 for (key, value) in self.provideToCharts {
                     
                     keys.append(key)
-                    values.append(value)
+                    values.append(Double(value))
                 }
                 
                 self.setChart(dataPoints: keys, values: values)
@@ -102,35 +135,38 @@ class InTheWorldViewController: UIViewController {
     }
 }
 
+// create chart
 extension InTheWorldViewController {
     
-    func setChart(dataPoints: [String], values: [Int]) {
+    func setChart(dataPoints: [String], values: [Double]) {
         
         // 1. Set ChartDataEntry
-        var dataEntries: [ChartDataEntry] = []
+        var dataEntries: [BarChartDataEntry] = []
         
         for i in 0..<dataPoints.count {
             
-            let dataEntry = PieChartDataEntry(value: Double(values[i]), label: dataPoints[i], data: dataPoints[i] as AnyObject)
-            
+            let dataEntry = BarChartDataEntry(x: Double(i), yValues: [values[i]])
             dataEntries.append(dataEntry)
         }
         // 2. Set ChartDataSet
-        let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: nil)
+        let barChartDataSet = BarChartDataSet(entries: dataEntries, label: "123")
         
-        pieChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
+        barChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
         
         // 3. Set ChartData
-        let pieChartData = PieChartData(dataSet: pieChartDataSet)
+        let barChartData = BarChartData(dataSet: barChartDataSet)
         
         let format = NumberFormatter()
         format.numberStyle = .decimal
         let formatter = DefaultValueFormatter(formatter: format)
+
+        barChartData.setValueFormatter(formatter)
         
-        pieChartData.setValueFormatter(formatter)
+        barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         
         // 4. Assign it to the chart’s data
-        pieChartView.data = pieChartData
+        barChartView.data = barChartData
+        
     }
     
     private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
@@ -149,3 +185,4 @@ extension InTheWorldViewController {
         return colors
     }
 }
+

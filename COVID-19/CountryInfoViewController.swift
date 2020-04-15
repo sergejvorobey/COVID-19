@@ -24,7 +24,7 @@ class CountryInfoViewController: UIViewController {
         let coordinateCenter = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         let mkAnnotation = MKPointAnnotation()
         mkAnnotation.title = infoCountry?.name
-        mkAnnotation.subtitle = infoCountry?.cases?.description
+        mkAnnotation.subtitle = "Текущее количество зараженных: \(infoCountry?.cases ?? 0)"
         mkAnnotation.coordinate = coordinateCenter
 
         mapView.setCenter(coordinateCenter, animated: true)

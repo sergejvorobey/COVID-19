@@ -22,6 +22,7 @@
 		87687A0E2441FE0300FF943B /* NewsWebSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87687A0D2441FE0300FF943B /* NewsWebSiteViewController.swift */; };
 		8782FE6A243E9F5400BC0ACC /* CountryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782FE69243E9F5400BC0ACC /* CountryInfoViewController.swift */; };
 		87D726352446024B00D6F88F /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D726342446024B00D6F88F /* BarChartViewController.swift */; };
+		87D7263824473AAE00D6F88F /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D7263724473AAE00D6F88F /* HelperExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,7 @@
 		87687A0D2441FE0300FF943B /* NewsWebSiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebSiteViewController.swift; sourceTree = "<group>"; };
 		8782FE69243E9F5400BC0ACC /* CountryInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoViewController.swift; sourceTree = "<group>"; };
 		87D726342446024B00D6F88F /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
+		87D7263724473AAE00D6F88F /* HelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
 		EB1A7984998F5FA93BA506D9 /* Pods-COVID-19.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19.debug.xcconfig"; path = "Target Support Files/Pods-COVID-19/Pods-COVID-19.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E0F69AB766A27BBE38C3EA /* Pods-COVID-19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19.release.xcconfig"; path = "Target Support Files/Pods-COVID-19/Pods-COVID-19.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		875F6A512437A6D0002C652D /* COVID-19 */ = {
 			isa = PBXGroup;
 			children = (
+				87D7263624473A7A00D6F88F /* HelperExtensions */,
 				875F6A522437A6D0002C652D /* AppDelegate.swift */,
 				875F6A542437A6D0002C652D /* SceneDelegate.swift */,
 				875F6A6F2437B689002C652D /* HelperFile */,
@@ -144,6 +147,14 @@
 			);
 			name = HelperFile;
 			path = Model;
+			sourceTree = "<group>";
+		};
+		87D7263624473A7A00D6F88F /* HelperExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				87D7263724473AAE00D6F88F /* HelperExtensions.swift */,
+			);
+			name = HelperExtensions;
 			sourceTree = "<group>";
 		};
 		CF20BB0E6E7F71E09CC68937 /* Frameworks */ = {
@@ -283,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8704055F2440FECA001B88FE /* InTheWorldViewController.swift in Sources */,
+				87D7263824473AAE00D6F88F /* HelperExtensions.swift in Sources */,
 				875F6A6E2437B61F002C652D /* ModelCountry.swift in Sources */,
 				875F6A732438CF98002C652D /* DataLoaderAPI.swift in Sources */,
 				875F6A6A2437B150002C652D /* CountryCell.swift in Sources */,

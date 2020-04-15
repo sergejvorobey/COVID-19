@@ -76,7 +76,4 @@ class BarChartViewController: UIViewController {
     }
 }
 
-extension BarChartViewController {
-    
-    
-}
+

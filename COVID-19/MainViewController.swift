@@ -175,21 +175,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: Convert Date
-extension Date {
-    
-    func publicationDate(withDate date: Date) -> String {
-        
-        var currentDatePublic = ""
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d MMM, HH:mm"
-        formatter.locale = Locale(identifier: "ru_RU")
-        currentDatePublic = formatter.string(from: date)
-        return currentDatePublic
-    }
-}
-
 // MARK: Input Search Bar and design
 extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
@@ -224,10 +209,6 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
         
         tableView.reloadData()
     }
-}
-
-extension Data {
-    var uiImage: UIImage? { UIImage(data: self) }
 }
 
 extension MainViewController {
