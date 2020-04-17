@@ -77,7 +77,15 @@ class MainViewController: UIViewController {
     
     @IBAction func infoButton(_ sender: UIBarButtonItem) {
         
-       
+        var time = 0
+        
+        for item in countries {
+            time = item.updated!
+        }
+        let datePublic = time
+        let date = Date(timeIntervalSince1970: TimeInterval(datePublic / 1000))
+        let dateUpdate = date.publicationDate(withDate: date)
+        alertInfo(withMessage: dateUpdate)
     }
     
     //scroll to top
@@ -110,37 +118,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         countryCell.countryLabel.text = country.name
-        countryCell.cases.text = "\(country.cases ?? 0)"
-        countryCell.deaths.text = "\(country.deaths ?? 0)"
-        countryCell.recovered.text = "\(country.recovered ?? 0)"
-        countryCell.todayCases.text = "\(country.todayCases ?? 0)"
-        countryCell.todayDeaths.text = "\(country.todayDeaths ?? 0)"
-        
-        let datePublic = country.updated!
-        let date = Date(timeIntervalSince1970: TimeInterval(datePublic / 1000))
-        
-        countryCell.timeUpdate.text = date.publicationDate(withDate: date)
-//                countryCell.countryFlag.image = UIImage(data: try! Data(contentsOf: URL(string: country.countryInfo!.flag!)!))
-        
-        //        let myImage = UIImage(named: country.countryInfo!.flag!)
-        //        func base64Convert(base64String: String?) -> UIImage {
-        //
-        //            var imageFlag: UIImage?
-        //
-        //            if (base64String?.isEmpty)! {
-        //                return #imageLiteral(resourceName: "no_image_found")
-        //            } else {
-        //                let url = URL(string: country.countryInfo!.flag!)
-        //                if let data = try? Data(contentsOf: url!)
-        //                {
-        //                    let image: UIImage = UIImage(data: data)!
-        //                    imageFlag = image
-        //                }
-        //                return imageFlag!
-        //            }
-        //        }
-        
-//                countryCell.countryFlag.image = base64Convert(base64String: country.countryInfo!.flag!)
+        countryCell.accessoryType = .disclosureIndicator
         
         return countryCell
     }
@@ -150,7 +128,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+        return 60
     }
     
     //MARK: Navigation
@@ -215,7 +193,7 @@ extension MainViewController {
     
     func alertInfo(withMessage message: String) {
         
-        let alertController = UIAlertController(title: "",
+        let alertController = UIAlertController(title: "Последнее обновление данных: ",
                                                 message: message,
                                                 preferredStyle: .alert)
         

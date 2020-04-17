@@ -40,3 +40,4 @@ extension UIStackView {
         subView.clipsToBounds = true
     }
 }
+
