@@ -11,7 +11,8 @@ import Alamofire
 
 class DataLoaderAPI {
     
-    fileprivate var baseURL = "https://corona.lmao.ninja/countries/"
+//    fileprivate var baseURL = "https://corona.lmao.ninja/countries/"
+    fileprivate var baseURL = "https://corona.lmao.ninja/v2/countries/"
 
     typealias countriesCallBack = (_ countries:[Country]?, _ status: Bool, _ message:String) -> Void
    

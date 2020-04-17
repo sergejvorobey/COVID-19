@@ -149,7 +149,7 @@ extension InTheWorldViewController {
             dataEntries.append(dataEntry)
         }
         // 2. Set ChartDataSet
-        let barChartDataSet = BarChartDataSet(entries: dataEntries, label: "123")
+        let barChartDataSet = BarChartDataSet(entries: dataEntries, label: "Статистика")
         
         barChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
         
