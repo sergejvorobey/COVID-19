@@ -36,17 +36,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-ci-AYm">
-                                                    <rect key="frame" x="314" y="5" width="80" height="33"/>
+                                                    <rect key="frame" x="314" y="5" width="80" height="33.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="1Ec-mw-Ysx"/>
+                                                        <constraint firstAttribute="height" constant="33" id="WQi-Ak-ymv"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="leading" secondItem="ddm-c7-imQ" secondAttribute="trailing" constant="8" id="Oeq-qn-Bw1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mqn-ci-AYm" secondAttribute="trailing" constant="20" id="Syk-6N-mlI"/>
                                                 <constraint firstItem="ddm-c7-imQ" firstAttribute="leading" secondItem="num-dl-4ye" secondAttribute="leading" constant="20" id="TmK-7r-ksf"/>
-                                                <constraint firstAttribute="bottom" secondItem="Mqn-ci-AYm" secondAttribute="bottom" constant="6" id="YD8-nf-yqC"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mqn-ci-AYm" secondAttribute="bottom" constant="5.5" id="Vei-Ya-7vh"/>
+                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="leading" secondItem="ddm-c7-imQ" secondAttribute="trailing" constant="8" id="WpF-e7-QIG"/>
                                                 <constraint firstItem="ddm-c7-imQ" firstAttribute="top" secondItem="num-dl-4ye" secondAttribute="top" constant="9" id="byQ-CQ-Pyk"/>
+                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="top" secondItem="num-dl-4ye" secondAttribute="top" constant="5" id="k2N-NX-b5b"/>
                                                 <constraint firstAttribute="bottom" secondItem="ddm-c7-imQ" secondAttribute="bottom" constant="10.5" id="vjI-ev-xQP"/>
-                                                <constraint firstAttribute="trailing" secondItem="Mqn-ci-AYm" secondAttribute="trailing" constant="20" id="yIu-2o-Apm"/>
-                                                <constraint firstItem="Mqn-ci-AYm" firstAttribute="top" secondItem="num-dl-4ye" secondAttribute="top" constant="5" id="zbJ-qq-twN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -75,7 +79,7 @@
                                 <action selector="infoButton:" destination="BYZ-38-t0r" id="cnG-G9-Jps"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="dbP-Qy-CMq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="dbP-Qy-CMq">
                             <connections>
                                 <action selector="refreshButton:" destination="BYZ-38-t0r" id="7mw-oX-34e"/>
                             </connections>
@@ -426,13 +430,13 @@
                                                 <rect key="frame" x="20" y="586" width="374" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выздоровели:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEN-dG-S8I">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="22.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="27"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recovered" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mas-dV-R2f">
-                                                        <rect key="frame" x="0.0" y="30.5" width="374" height="39.5"/>
+                                                        <rect key="frame" x="0.0" y="35" width="374" height="35"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

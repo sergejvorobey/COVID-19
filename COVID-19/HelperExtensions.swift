@@ -41,3 +41,36 @@ extension UIStackView {
     }
 }
 
+//download flag
+extension UIImageView {
+    
+    //    func load(url: URL) {
+    //        image = nil
+    //        DispatchQueue.global().async { [weak self] in
+    //            if let data = try? Data(contentsOf: url) {
+    //                if let image = UIImage(data: data) {
+    //                    DispatchQueue.main.async {
+    //                        self?.image = image
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    
+    func loadImage(from url: URL) {
+        image = nil
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data, let newImage = UIImage(data: data)
+                else {
+                    print("dont load image from \(url)")
+                    return
+            }
+            
+            DispatchQueue.main.async {
+                self.image = newImage
+            }
+        }
+        
+        task.resume()
+    }
+}

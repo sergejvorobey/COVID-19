@@ -12,11 +12,5 @@ class CountryCell: UITableViewCell {
 
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var countryFlag: UIImageView!
-    
-    @IBOutlet weak var cases: UILabel!
-    @IBOutlet weak var todayCases: UILabel!
-    @IBOutlet weak var deaths: UILabel!
-    @IBOutlet weak var todayDeaths: UILabel!
-    @IBOutlet weak var recovered: UILabel!
-    @IBOutlet weak var timeUpdate: UILabel!
+ 
 }

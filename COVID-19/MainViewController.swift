@@ -18,13 +18,14 @@ class MainViewController: UIViewController {
     private var countries = [Country]()
     private var filteredCountries = [Country]()
     
-    let activityIndicator = UIActivityIndicatorView()
+    let spinner = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         searchBar()
         parseData()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -49,7 +50,7 @@ class MainViewController: UIViewController {
                 self.countries = _countries
                 self.countries.sort(by: {Int($0.cases!) > Int($1.cases!)})
                 self.navigationItem.title = "\(self.countries.count) Стран"
-            
+                
                 self.tableView.reloadData()
             }
         }
@@ -120,6 +121,11 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         countryCell.countryLabel.text = country.name
         countryCell.accessoryType = .disclosureIndicator
         
+        if let url = URL(string: country.countryInfo!.flag!) {
+            //            countryCell.countryFlag.load(url: url)
+            countryCell.countryFlag.loadImage(from: url)
+        }
+        
         return countryCell
     }
     
@@ -128,7 +134,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 100
     }
     
     //MARK: Navigation
@@ -202,4 +208,10 @@ extension MainViewController {
         alertController.addAction(cancel)
         present(alertController, animated: true, completion: nil)
     }
+}
+
+extension MainViewController {
+    
+    
+    
 }
