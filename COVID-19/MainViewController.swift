@@ -123,6 +123,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let url = URL(string: country.countryInfo!.flag!) {
             //            countryCell.countryFlag.load(url: url)
+            countryCell.countryFlag.layer.cornerRadius = 5
+            countryCell.countryFlag.layer.borderWidth = 0.5
+            countryCell.countryFlag.layer.masksToBounds = true
             countryCell.countryFlag.loadImage(from: url)
         }
         
@@ -134,7 +137,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 75
     }
     
     //MARK: Navigation
@@ -210,8 +213,3 @@ extension MainViewController {
     }
 }
 
-extension MainViewController {
-    
-    
-    
-}
